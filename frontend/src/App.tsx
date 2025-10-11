@@ -1,14 +1,16 @@
 import { ChatKit, useChatKit } from '@openai/chatkit-react'
-import type { ChatKitOptions } from '@openai/chatkit'
+import type { ChatKitOptions, ColorScheme } from '@openai/chatkit'
 import './App.css'
 
 function MyChat() {
   // Prefer system theme; default to dark
   const prefersDark = globalThis.matchMedia?.('(prefers-color-scheme: dark)').matches ?? true
 
-  const options: Partial<ChatKitOptions> = {
+  const options: ChatKitOptions = {
     api: {
-      async getClientSecret(existing) {
+      async getClientSecret(currentClientSecret: string | null) {
+        // Mark as used to satisfy TS when not implementing refresh yet
+        void currentClientSecret
         // Always request a fresh client_secret; you can implement refresh if needed
         const deviceId = localStorage.getItem('chatkit_device_id') || crypto.randomUUID()
         localStorage.setItem('chatkit_device_id', deviceId)
@@ -24,7 +26,7 @@ function MyChat() {
       },
     },
     theme: {
-      colorScheme: prefersDark ? 'dark' : 'light',
+      colorScheme: (prefersDark ? 'dark' : 'light') as ColorScheme,
       radius: 'pill',
       density: 'normal',
       color: {
