@@ -1,20 +1,17 @@
+'use client'
+
 import { ChatKit, useChatKit } from '@openai/chatkit-react'
 import type { ChatKitOptions, ColorScheme } from '@openai/chatkit'
-import './App.css'
 
-function MyChat() {
-  // Prefer system theme; default to dark
+export default function Page() {
   const prefersDark = globalThis.matchMedia?.('(prefers-color-scheme: dark)').matches ?? true
 
   const options: ChatKitOptions = {
     api: {
       async getClientSecret(currentClientSecret: string | null) {
-        // Mark as used to satisfy TS when not implementing refresh yet
         void currentClientSecret
-        // Always request a fresh client_secret; you can implement refresh if needed
         const deviceId = localStorage.getItem('chatkit_device_id') || crypto.randomUUID()
         localStorage.setItem('chatkit_device_id', deviceId)
-
         const res = await fetch('/api/chatkit/session', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -29,9 +26,7 @@ function MyChat() {
       colorScheme: (prefersDark ? 'dark' : 'light') as ColorScheme,
       radius: 'pill',
       density: 'normal',
-      color: {
-        accent: { primary: '#A7C7E7', level: 3 },
-      },
+      color: { accent: { primary: '#A7C7E7', level: 3 } },
       typography: {
         baseSize: 16,
         fontFamily:
@@ -49,14 +44,8 @@ function MyChat() {
         ],
       },
     },
-    composer: {
-      placeholder: 'Message Yurie',
-      attachments: { enabled: false },
-    },
-    startScreen: {
-      greeting: '',
-      prompts: [],
-    },
+    composer: { placeholder: 'Message Yurie', attachments: { enabled: false } },
+    startScreen: { greeting: '', prompts: [] },
   }
 
   const { control } = useChatKit(options)
@@ -67,6 +56,4 @@ function MyChat() {
   )
 }
 
-export default function App() {
-  return <MyChat />
-}
+
