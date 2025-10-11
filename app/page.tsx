@@ -1,11 +1,9 @@
 'use client'
 
 import { ChatKit, useChatKit } from '@openai/chatkit-react'
-import type { ChatKitOptions, ColorScheme } from '@openai/chatkit'
+import type { ChatKitOptions } from '@openai/chatkit'
 
 export default function Page() {
-  const prefersDark = globalThis.matchMedia?.('(prefers-color-scheme: dark)').matches ?? true
-
   const options: ChatKitOptions = {
     api: {
       async getClientSecret(currentClientSecret: string | null) {
@@ -23,12 +21,15 @@ export default function Page() {
       },
     },
     theme: {
-      colorScheme: (prefersDark ? 'dark' : 'light') as ColorScheme,
+      colorScheme: 'dark',
       radius: 'pill',
       density: 'normal',
-      color: { accent: { primary: '#A7C7E7', level: 3 } },
+      color: {
+        accent: { primary: '#7F91E0', level: 3 },
+        surface: { background: '#000000', foreground: '#202020' },
+      },
       typography: {
-        baseSize: 16,
+        baseSize: 18,
         fontFamily:
           '"OpenAI Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif',
         fontFamilyMono:
@@ -44,7 +45,10 @@ export default function Page() {
         ],
       },
     },
-    composer: { placeholder: 'Message Yurie', attachments: { enabled: false } },
+    composer: {
+      placeholder: 'Message Yurie',
+      attachments: { enabled: false },
+    },
     startScreen: { greeting: '', prompts: [] },
   }
 
