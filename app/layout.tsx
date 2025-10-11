@@ -11,6 +11,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="color-scheme" content="dark" />
         <meta name="theme-color" content="#000000" />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/favicon.ico" />
+        <link rel="manifest" href="/manifest.webmanifest" />
         <script src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js" async></script>
         <style>{`
           :root { color-scheme: dark; }
