@@ -40,3 +40,11 @@ Notes
 - Vite proxies `/api` to the backend.
 - Theme defaults to system preference, with dark mode and custom accent.
 
+Vercel
+------
+- Deploy this repo root (`app/`).
+- Set environment variables in Vercel project:
+  - `OPENAI_API_KEY`
+  - `NEXT_PUBLIC_CHATKIT_WORKFLOW_ID`
+- Vercel will build `frontend` via `vercel-build` and serve static files; API routes under `frontend/api/*` will run as serverless functions.
+
