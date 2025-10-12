@@ -28,14 +28,6 @@ export default function Page() {
     }
   }, [])
 
-  const openProfileSettings = (): void => {
-    alert('Open Profile Settings')
-  }
-
-  const openHomePage = (): void => {
-    window.location.assign('/')
-  }
-
   const toggleTheme = (): void => {
     setIsDark((value) => !value)
   }
@@ -59,10 +51,6 @@ export default function Page() {
     header: {
       title: {
         enabled: false,
-      },
-      leftAction: {
-        icon: 'home',
-        onClick: openHomePage,
       },
       rightAction: {
         icon: isDark ? 'light-mode' : 'dark-mode',
