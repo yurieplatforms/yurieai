@@ -1,3 +1,5 @@
+import { Analytics } from '@vercel/analytics/next'
+
 export const metadata = {
   title: 'Yurie',
   description: 'Yurie ChatKit App',
@@ -25,7 +27,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }
         `}</style>
       </head>
-      <body style={{ margin: 0, minHeight: '100svh' }}>{children}</body>
+      <body style={{ margin: 0, minHeight: '100svh' }}>
+        {children}
+        <Analytics />
+      </body>
     </html>
   )
 }

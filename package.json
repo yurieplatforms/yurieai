@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@openai/chatkit-react": "^1.1.1",
+    "@vercel/analytics": "^1.5.0",
     "next": "^15.1.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
@@ -23,5 +24,3 @@
     "typescript": "^5.9.3"
   }
 }
-
-
