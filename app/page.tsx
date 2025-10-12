@@ -2,9 +2,45 @@
 
 import { ChatKit, useChatKit } from '@openai/chatkit-react'
 import type { ChatKitOptions } from '@openai/chatkit'
+import { useMemo, useState, useEffect } from 'react'
 
 export default function Page() {
-  const options: ChatKitOptions = {
+  const [isDark, setIsDark] = useState(() => {
+    // Initialize based on system preference
+    if (typeof window !== 'undefined') {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches
+    }
+    return true
+  })
+
+  useEffect(() => {
+    // Listen for system theme changes
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    
+    const handleChange = (e: MediaQueryListEvent) => {
+      setIsDark(e.matches)
+    }
+    
+    mediaQuery.addEventListener('change', handleChange)
+    
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange)
+    }
+  }, [])
+
+  const openProfileSettings = (): void => {
+    alert('Open Profile Settings')
+  }
+
+  const openHomePage = (): void => {
+    window.location.assign('/')
+  }
+
+  const toggleTheme = (): void => {
+    setIsDark((value) => !value)
+  }
+
+  const options: ChatKitOptions = useMemo(() => ({
     api: {
       async getClientSecret(currentClientSecret: string | null) {
         void currentClientSecret
@@ -20,13 +56,22 @@ export default function Page() {
         return client_secret as string
       },
     },
+    header: {
+      title: {
+        enabled: false,
+      },
+      rightAction: {
+        icon: isDark ? 'light-mode' : 'dark-mode',
+        onClick: toggleTheme,
+      },
+    },
     theme: {
-      colorScheme: 'dark',
+      colorScheme: isDark ? 'dark' : 'light',
       radius: 'pill',
       density: 'normal',
       color: {
         accent: { primary: '#7F91E0', level: 3 },
-        surface: { background: '#000000', foreground: '#202020' },
+        ...(isDark && { surface: { background: '#000000', foreground: '#202020' } }),
       },
       typography: {
         baseSize: 18,
@@ -64,11 +109,28 @@ export default function Page() {
         { icon: 'circle-question', label: 'Future technology', prompt: 'What breakthrough technologies might we see in the next 10 years?' },
       ],
     },
-  }
+  }), [isDark])
 
   const { control } = useChatKit(options)
   return (
-    <div style={{ height: '100dvh', width: '100vw' }}>
+    <div style={{ height: '100dvh', width: '100vw', position: 'relative' }}>
+      <button
+        type="button"
+        aria-label="Home"
+        onClick={openHomePage}
+        style={{
+          position: 'absolute',
+          top: 12,
+          left: 20,
+          zIndex: 10,
+          background: 'transparent',
+          border: 'none',
+          padding: 0,
+          cursor: 'pointer',
+        }}
+      >
+        <img src="/favicon.ico" alt="Home" style={{ width: 28, height: 28 }} />
+      </button>
       <ChatKit control={control} style={{ height: '100%', width: '100%' }} />
     </div>
   )
