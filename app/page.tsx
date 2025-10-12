@@ -49,7 +49,16 @@ export default function Page() {
       placeholder: 'Message Yurie',
       attachments: { enabled: false },
     },
-    startScreen: { greeting: '', prompts: [] },
+    startScreen: {
+      greeting: '',
+      prompts: [
+        { icon: 'circle-question', label: 'Tell me about the Renaissance period', prompt: 'Tell me about the Renaissance period and its impact on modern society' },
+        { icon: 'circle-question', label: 'What are black holes?', prompt: 'What are black holes and how do they form?' },
+        { icon: 'circle-question', label: 'Recommend a sci-fi movie', prompt: 'Recommend a great sci-fi movie and tell me why it\'s worth watching' },
+        { icon: 'circle-question', label: 'Explain quantum computing', prompt: 'Explain quantum computing in simple terms' },
+        { icon: 'circle-question', label: 'Ancient civilizations', prompt: 'What were the most influential ancient civilizations?' },
+      ],
+    },
   }
 
   const { control } = useChatKit(options)
