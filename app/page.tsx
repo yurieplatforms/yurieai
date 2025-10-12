@@ -52,11 +52,16 @@ export default function Page() {
     startScreen: {
       greeting: '',
       prompts: [
-        { icon: 'circle-question', label: 'Tell me about the Renaissance period', prompt: 'Tell me about the Renaissance period and its impact on modern society' },
-        { icon: 'circle-question', label: 'What are black holes?', prompt: 'What are black holes and how do they form?' },
-        { icon: 'circle-question', label: 'Recommend a sci-fi movie', prompt: 'Recommend a great sci-fi movie and tell me why it\'s worth watching' },
-        { icon: 'circle-question', label: 'Explain quantum computing', prompt: 'Explain quantum computing in simple terms' },
-        { icon: 'circle-question', label: 'Ancient civilizations', prompt: 'What were the most influential ancient civilizations?' },
+        { icon: 'circle-question', label: 'Ancient Rome facts', prompt: 'Tell me fascinating facts about Ancient Rome' },
+        { icon: 'circle-question', label: 'How does AI work?', prompt: 'Explain how artificial intelligence works in simple terms' },
+        { icon: 'circle-question', label: 'Best mystery novels', prompt: 'Recommend some gripping mystery novels I should read' },
+        { icon: 'circle-question', label: 'Origin of the universe', prompt: 'What do we know about the origin of the universe?' },
+        { icon: 'circle-question', label: 'World War II turning points', prompt: 'What were the key turning points of World War II?' },
+        { icon: 'circle-question', label: 'Climate change solutions', prompt: 'What are the most promising solutions to climate change?' },
+        { icon: 'circle-question', label: 'Classic films to watch', prompt: 'What are some must-watch classic films from cinema history?' },
+        { icon: 'circle-question', label: 'Human brain mysteries', prompt: 'What are some unsolved mysteries about the human brain?' },
+        { icon: 'circle-question', label: 'Music evolution', prompt: 'How has music evolved over the past century?' },
+        { icon: 'circle-question', label: 'Future technology', prompt: 'What breakthrough technologies might we see in the next 10 years?' },
       ],
     },
   }
