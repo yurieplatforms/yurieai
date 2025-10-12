@@ -57,6 +57,9 @@ export default function Page() {
         onClick: toggleTheme,
       },
     },
+    threadItemActions: {
+      feedback: false,
+    },
     theme: {
       colorScheme: isDark ? 'dark' : 'light',
       radius: 'pill',
@@ -110,5 +113,3 @@ export default function Page() {
     </div>
   )
 }
-
-
