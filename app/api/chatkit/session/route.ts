@@ -1,12 +1,18 @@
 import { NextRequest } from 'next/server'
 
 export async function POST(req: NextRequest) {
-  const apiKey = process.env.OPENAI_API_KEY
-  const workflowId = process.env.NEXT_PUBLIC_CHATKIT_WORKFLOW_ID
+  const apiKey = process.env.OPENAI_API_KEY?.trim()
+  const workflowId = (process.env.CHATKIT_WORKFLOW_ID ?? process.env.NEXT_PUBLIC_CHATKIT_WORKFLOW_ID)?.trim()
+
   if (!apiKey || !workflowId) {
+    const missing = [
+      !apiKey && 'OPENAI_API_KEY',
+      !workflowId && 'CHATKIT_WORKFLOW_ID (or NEXT_PUBLIC_CHATKIT_WORKFLOW_ID)',
+    ].filter(Boolean)
+
     return new Response(JSON.stringify({
-      error: 'Missing OPENAI_API_KEY or NEXT_PUBLIC_CHATKIT_WORKFLOW_ID',
-      hint: 'Set these in .env.local and restart the dev server',
+      error: `Missing required environment variable${missing.length > 1 ? 's' : ''}: ${missing.join(', ')}`,
+      hint: 'Add the variables to .env.local and restart the dev server. NEXT_PUBLIC_CHATKIT_WORKFLOW_ID is also accepted for backwards compatibility.',
     }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
